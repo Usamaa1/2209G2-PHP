@@ -46,26 +46,68 @@
 
 
             function viewProducts() {
+          
+                    let oldData;
 
-                let oldData;
+                    $.ajax({
+                        url: 'query/viewQuery.php',
+                        type: 'POST',
+                        data: {},
+                        success: (prod) => {
 
-                $.ajax({
-                    url: 'query/viewQuery.php',
-                    type: 'POST',
-                    data: {},
-                    success: (prod) => {
+                            if (oldData != prod) {
+                                // console.log(prod);
+                                container.innerHTML = prod;
 
-                        if (oldData != prod) {
-                            console.log(prod);
-                            container.innerHTML = prod;
+                                let deleteBtn = document.querySelectorAll('.deleteBtn');
+
+                                deleteBtn.forEach(delBtn => {
+                                    delBtn.addEventListener('click',function (){
+                                        
+                                        console.log(this.getAttribute('del'));
+
+                                        delId = this.getAttribute('del');
+
+
+                                        $.ajax({
+                                            url: 'query/delete.php',
+                                            type: 'POST',
+                                            data: {
+                                                delId: delId
+                                            },
+                                            success: (data)=>{
+                                                console.log(data);
+                                                viewProducts();
+                                            }
+                                        })
+
+
+
+
+
+
+
+
+
+
+                                    })
+                                }); 
+
+
+                            }
+
+                            oldData = prod;
+
+
                         }
-                        oldData = prod;
+                    })
+            
 
-                    }
-                })
+
 
             }
 
+            viewProducts()
             setInterval(viewProducts, 1000);
 
 
@@ -79,9 +121,21 @@
 
 
 
-
-
         })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

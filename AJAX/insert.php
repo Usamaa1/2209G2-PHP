@@ -14,7 +14,7 @@
 
     <div class="container">
         <div class="row">
-            <form class="row g-3">
+            <form class="row g-3" id="reset">
 
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Product Name</label>
@@ -38,7 +38,6 @@
 
 
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
@@ -49,11 +48,10 @@
         $(document).ready(() => {
 
             let addBtn = document.getElementById('addBtn');
+            let reset = document.getElementById('reset');
 
             addBtn.addEventListener('click', (e) => {
-
                 e.preventDefault();
-
 
                 let productName = document.getElementById('productName').value;
                 let productPrice = document.getElementById('productPrice').value;
@@ -70,8 +68,9 @@
                         prodPrice: productPrice,
                         prodDesc: productDesc
                     },
-                    success: ()=>{
+                    success: () => {
                         console.log('Data inserted Successfully');
+                        reset.reset();
                     }
                 })
 
