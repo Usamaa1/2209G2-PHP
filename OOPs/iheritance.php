@@ -42,9 +42,9 @@ class MeezanBank extends BankAccount
     }
 
 }
-class BankAlfalah extends BankAccount
+class BankAlfalah extends MeezanBank
 {
-
+    
 }
 
 
